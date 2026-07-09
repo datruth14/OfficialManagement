@@ -35,10 +35,23 @@ async function renderSuperAdminAdmins() {
   }
 }
 
+function renderTeamListBadge(a) {
+  if (a.has_teams) {
+    return `<span style="display:inline-flex;align-items:center;gap:4px;color:#065f46;font-size:0.82rem;font-weight:600;">
+      <span style="width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;"></span>
+      Teams (${a.team_count})
+    </span>`;
+  }
+  return `<span style="display:inline-flex;align-items:center;gap:4px;color:#991b1b;font-size:0.82rem;font-weight:500;">
+    <span style="width:8px;height:8px;border-radius:50%;background:#ef4444;display:inline-block;"></span>
+    No Team
+  </span>`;
+}
+
 function renderAdminsTable(data) {
   if (!data.length) return '<div class="empty-state"><p>No team leaders found</p></div>';
   const cols = isSuperUser() ? '<th>Actions</th>' : '';
-  return `<div class="table-responsive"><table><thead><tr><th>Fullname</th><th>Username</th><th>Email</th><th>Phone</th><th>Department</th><th>Status</th>${cols}</tr></thead><tbody>
+  return `<div class="table-responsive"><table><thead><tr><th>Fullname</th><th>Username</th><th>Email</th><th>Phone</th><th>Department</th><th>Status</th><th>Team List</th>${cols}</tr></thead><tbody>
     ${data.map(a => `<tr>
       <td><strong>${escapeHtml(a.fullname)}</strong></td>
       <td>${escapeHtml(a.username)}</td>
@@ -46,6 +59,7 @@ function renderAdminsTable(data) {
       <td>${escapeHtml(a.phone) || '-'}</td>
       <td>${escapeHtml(a.department) || '-'}</td>
       <td>${getStatusBadge(a.status)}</td>
+      <td>${renderTeamListBadge(a)}</td>
       ${isSuperUser() ? `<td class="actions">
         <button class="btn btn-sm btn-ghost" onclick="editSuperAdminAdmin(${a.id})">Edit</button>
         <button class="btn btn-sm btn-danger" onclick="deleteSuperAdminAdmin(${a.id})">Delete</button>
