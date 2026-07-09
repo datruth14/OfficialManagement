@@ -68,7 +68,7 @@ function renderSidebar() {
   sidebar.innerHTML = `
     <div class="sidebar-brand">
       <div class="brand-logo">S</div>
-      <span class="brand-text">Officials Management</span>
+      <span class="brand-text">Official Management</span>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-label">Navigation</div>
@@ -124,7 +124,42 @@ function getStatusBadge(status) {
     : '<span class="badge badge-inactive">Inactive</span>';
 }
 
+function renderWelcomePage() {
+  const app = document.getElementById('app');
+  app.classList.add('login-mode');
+  const mc = document.getElementById('mainContent');
+  if (mc) mc.classList.add('login-mode');
+  const sb = document.getElementById('sidebar');
+  if (sb) { sb.innerHTML = ''; sb.style.display = 'none'; }
+
+  document.getElementById('page-content').innerHTML = `
+    <div class="welcome-page">
+      <div class="welcome-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      <div class="welcome-content">
+        <div class="welcome-logo">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+            <rect width="72" height="72" rx="18" fill="#f59e0b"/>
+            <path d="M36 20c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zM18 50c0-4.67 10-7 18-7s18 2.33 18 7v4H18v-4z" fill="#0f172a"/>
+          </svg>
+        </div>
+        <h1>Official Management System</h1>
+        <p class="welcome-tagline">Streamline your team management, events, and workforce organization in one place.</p>
+        <button class="btn btn-primary btn-enter" onclick="Router.navigate('/login')">
+          <span>Enter Official Management Portal</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </button>
+        <p class="welcome-footer">© 2026 Official Management System. All rights reserved.</p>
+      </div>
+    </div>
+  `;
+}
+
 function registerRoutes() {
+  Router.register('/welcome', renderWelcomePage);
   Router.register('/login', renderLoginPage);
   Router.register('/admin/dashboard', renderAdminDashboard);
   Router.register('/admin/events', renderAdminEvents);

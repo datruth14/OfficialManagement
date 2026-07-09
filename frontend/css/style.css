@@ -208,6 +208,47 @@ table .actions { display: flex; gap: 4px; white-space: nowrap; }
 .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-lighter); padding: 4px 10px; border-radius: var(--radius-sm); line-height: 1; transition: all 0.15s; }
 .modal-close:hover { background: var(--bg); color: var(--text); }
 
+/* Welcome page */
+.welcome-page {
+  display: flex; align-items: center; justify-content: center; min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #334155 70%, #0f172a 100%);
+  position: relative; overflow: hidden;
+}
+.welcome-bg-shapes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.welcome-bg-shapes .shape { position: absolute; border-radius: 50%; opacity: 0.04; }
+.welcome-bg-shapes .shape-1 { width: 600px; height: 600px; background: #fbbf24; top: -250px; right: -200px; animation: floatShape 20s ease-in-out infinite; }
+.welcome-bg-shapes .shape-2 { width: 400px; height: 400px; background: #f59e0b; bottom: -120px; left: -100px; animation: floatShape 25s ease-in-out infinite reverse; }
+.welcome-bg-shapes .shape-3 { width: 250px; height: 250px; background: #fcd34d; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: floatShape 15s ease-in-out infinite 5s; }
+.welcome-content {
+  text-align: center; position: relative; z-index: 1; padding: 40px 24px;
+  animation: cardIn 0.6s ease-out;
+}
+.welcome-logo { margin-bottom: 28px; }
+.welcome-logo svg { filter: drop-shadow(0 8px 24px rgba(245,158,11,0.35)); }
+.welcome-content h1 {
+  font-size: 2.5rem; font-weight: 800; color: #f1f5f9;
+  letter-spacing: -0.03em; margin-bottom: 16px;
+}
+.welcome-tagline {
+  font-size: 1.1rem; color: rgba(255,255,255,0.5);
+  max-width: 480px; margin: 0 auto 36px; line-height: 1.6;
+}
+.btn-enter {
+  padding: 16px 36px; font-size: 1rem; font-weight: 700;
+  border-radius: 50px; gap: 10px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #0f172a; transition: all 0.25s;
+}
+.btn-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(245,158,11,0.4);
+}
+.btn-enter svg { transition: transform 0.2s; }
+.btn-enter:hover svg { transform: translateX(4px); }
+.welcome-footer {
+  margin-top: 56px; font-size: 0.8rem; color: rgba(255,255,255,0.2);
+}
+
 /* Login page */
 .login-page {
   display: flex; align-items: center; justify-content: center; min-height: 100vh;

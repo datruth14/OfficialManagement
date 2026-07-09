@@ -11,13 +11,15 @@ const Router = {
   },
 
   getCurrentHash() {
-    return window.location.hash.slice(1) || '/login';
+    const hash = window.location.hash.slice(1);
+    if (!hash) return '/welcome';
+    return hash;
   },
 
   handleRoute() {
     const hash = this.getCurrentHash();
 
-    if (!Auth.isLoggedIn() && hash !== '/login') {
+    if (!Auth.isLoggedIn() && hash !== '/login' && hash !== '/welcome') {
       this.navigate('/login');
       return;
     }
