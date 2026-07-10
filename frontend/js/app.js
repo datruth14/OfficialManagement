@@ -156,7 +156,7 @@ function renderWelcomePage() {
         </div>
       </div>
       <div class="relative z-10 flex-1 grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 px-4 md:px-12 pb-6 md:pb-10 max-w-5xl mx-auto w-full">
-        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 md:p-7 cursor-pointer transition-all duration-250 flex flex-col hover:bg-white/10 hover:border-brand/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30 active:-translate-y-0.5" onclick="Router.navigate('/login')">
+        <div class="h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 md:p-7 cursor-pointer transition-all duration-250 flex flex-col hover:bg-white/10 hover:border-brand/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30 active:-translate-y-0.5" onclick="Router.navigate('/login')">
           <div class="mb-3 md:mb-4">
             <svg width="32" height="32" viewBox="0 0 72 72" fill="none" class="md:w-10 md:h-10 drop-shadow-[0_4px_12px_rgba(245,158,11,0.3)]">
               <rect width="72" height="72" rx="16" fill="url(#g1)"/>
@@ -172,7 +172,7 @@ function renderWelcomePage() {
             <span class="inline-flex items-center gap-1.5 px-4 py-1.5 md:px-5 md:py-2 bg-brand/15 text-white/80 text-xs md:text-sm font-medium rounded-full border-none transition-all duration-200 hover:bg-gradient-to-r hover:from-brand hover:to-brand-dark hover:text-slate-900">Launch</span>
           </div>
         </div>
-        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 md:p-7 flex flex-col opacity-70">
+        <div class="h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 md:p-7 flex flex-col opacity-70">
           <div class="mb-3 md:mb-4">
             <svg width="32" height="32" viewBox="0 0 72 72" fill="none" class="md:w-10 md:h-10 drop-shadow-[0_4px_12px_rgba(245,158,11,0.3)]">
               <rect width="72" height="72" rx="16" fill="url(#g2)"/>

@@ -23,18 +23,21 @@ function renderLoginPage() {
   const remembered = localStorage.getItem('remembered_username') || '';
 
   document.getElementById('page-content').innerHTML = `
-    <div class="min-h-dvh flex items-center justify-center bg-gradient-to-br from-[#0f172a] via-[#1e293b] via-[#334155] to-[#0f172a] relative overflow-hidden">
+    <div class="min-h-dvh flex flex-col bg-gradient-to-br from-[#0f172a] via-[#1e293b] via-[#334155] to-[#0f172a] relative overflow-hidden">
       <div class="absolute inset-0 pointer-events-none overflow-hidden">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
         <div class="shape shape-3"></div>
       </div>
-      <div class="bg-white rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.3)] p-7 md:p-11 w-full max-w-[92%] md:max-w-[420px] relative z-10 animate-[modalIn_0.5s_ease-out]">
-        <button onclick="Router.navigate('/welcome')" class="absolute top-3 left-3 md:top-4 md:left-4 bg-transparent border-none cursor-pointer text-slate-400 p-2 rounded-[8px] flex items-center justify-center transition-all duration-200 hover:bg-surface hover:text-slate-900" aria-label="Back to welcome page">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <div class="relative z-10 px-4 md:px-8 pt-4 md:pt-6">
+        <button onclick="Router.navigate('/welcome')" class="bg-white/10 hover:bg-white/20 border-none cursor-pointer text-white/60 hover:text-white p-2.5 rounded-xl flex items-center justify-center transition-all duration-200" aria-label="Back to welcome page">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
           </svg>
         </button>
+      </div>
+      <div class="flex-1 flex items-center justify-center">
+      <div class="bg-white rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.3)] p-7 md:p-11 w-full max-w-[92%] md:max-w-[420px] relative z-10 animate-[modalIn_0.5s_ease-out]">
         <div class="text-center mb-5 md:mb-6">
           <svg class="drop-shadow-[0_4px_12px_rgba(245,158,11,0.3)]" width="52" height="52" viewBox="0 0 52 52" fill="none">
             <rect width="52" height="52" rx="14" fill="#f59e0b"/>
@@ -88,6 +91,7 @@ function renderLoginPage() {
           </button>
         </form>
         <p class="text-center mt-6 text-xs text-slate-400">Officials Management System v2.0</p>
+      </div>
       </div>
     </div>
   `;
