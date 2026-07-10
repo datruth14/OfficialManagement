@@ -54,21 +54,26 @@
 .table-responsive table {
   display: block;
 }
-.overflow-x-auto thead {
+.overflow-x-auto thead,
+.table-responsive thead {
   display: none;
 }
 .overflow-x-auto tbody,
-.overflow-x-auto tbody tr {
+.overflow-x-auto tbody tr,
+.table-responsive tbody,
+.table-responsive tbody tr {
   display: block;
 }
-.overflow-x-auto tbody tr {
+.overflow-x-auto tbody tr,
+.table-responsive tbody tr {
   margin-bottom: 10px;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 10px 12px;
   background: #fff;
 }
-.overflow-x-auto td {
+.overflow-x-auto td,
+.table-responsive td {
   display: flex !important;
   justify-content: space-between;
   align-items: center;
@@ -76,10 +81,12 @@
   border: none !important;
   padding: 6px 0 !important;
 }
-.overflow-x-auto td:not(:last-child) {
+.overflow-x-auto td:not(:last-child),
+.table-responsive td:not(:last-child) {
   border-bottom: 1px solid #f1f5f9 !important;
 }
-.overflow-x-auto td::before {
+.overflow-x-auto td::before,
+.table-responsive td::before {
   content: attr(data-label);
   font-weight: 600;
   font-size: 11px;
@@ -88,6 +95,7 @@
   letter-spacing: 0.3px;
   flex-shrink: 0;
 }
-.overflow-x-auto td .flex {
+.overflow-x-auto td .flex,
+.table-responsive td .flex {
   justify-content: flex-end;
 }
