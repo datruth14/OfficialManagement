@@ -31,14 +31,14 @@ function renderAdminEventsTable(data) {
   if (!data.length) return '<div class="text-center py-12 md:py-16 text-slate-400"><p class="mb-4 text-sm">No events found</p></div>';
   return `<div class="table-responsive"><table class="w-full border-collapse"><thead><tr><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Event Name</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Venue</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Date</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Time</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Teams</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Officials</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Status</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Actions</th></tr></thead><tbody>
     ${data.map(e => `<tr>
-      <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><strong>${escapeHtml(e.event_name)}</strong></td>
-      <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(e.venue) || '-'}</td>
-      <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${e.event_date || '-'}</td>
-      <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${e.start_time || ''}${e.start_time && e.end_time ? ' - ' : ''}${e.end_time || ''}</td>
-      <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${e.team_count}</td>
-      <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${e.staff_count}</td>
-      <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${getStatusBadge(e.status)}</td>
-      <td class="flex gap-1 flex-nowrap px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">
+      <td data-label="Event Name" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><strong>${escapeHtml(e.event_name)}</strong></td>
+      <td data-label="Venue" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(e.venue) || '-'}</td>
+      <td data-label="Date" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${e.event_date || '-'}</td>
+      <td data-label="Time" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${e.start_time || ''}${e.start_time && e.end_time ? ' - ' : ''}${e.end_time || ''}</td>
+      <td data-label="Teams" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${e.team_count}</td>
+      <td data-label="Officials" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${e.staff_count}</td>
+      <td data-label="Status" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${getStatusBadge(e.status)}</td>
+      <td data-label="Actions" class="flex gap-1 flex-nowrap px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">
         <button class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150" onclick="viewAdminEventTeams(${e.id})">Teams</button>
       </td>
     </tr>`).join('')}

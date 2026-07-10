@@ -49,20 +49,20 @@ function renderSuperStaffTable(search) {
       <div class="overflow-x-auto">
         ${filtered.length ? `<table class="w-full border-collapse"><thead><tr><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Official ID</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Name</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Email</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Phone</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Gender</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Roles</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Status</th>${actionsTh}</tr></thead><tbody>
           ${filtered.map(s => `<tr>
-            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.staff_id)}</td>
-            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.firstname)} ${escapeHtml(s.lastname)}</td>
-            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.email) || '-'}</td>
-            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.phone) || '-'}</td>
-            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.gender) || '-'}</td>
-            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${(s.roles || []).map(r => `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">${escapeHtml(r.name)}</span>`).join(' ') || '-'}</td>
-            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${getStatusBadge(s.status)}</td>
-            ${canModify ? `<td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">
+            <td data-label="Official ID" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.staff_id)}</td>
+            <td data-label="Name" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.firstname)} ${escapeHtml(s.lastname)}</td>
+            <td data-label="Email" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.email) || '-'}</td>
+            <td data-label="Phone" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.phone) || '-'}</td>
+            <td data-label="Gender" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.gender) || '-'}</td>
+            <td data-label="Roles" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${(s.roles || []).map(r => `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">${escapeHtml(r.name)}</span>`).join(' ') || '-'}</td>
+            <td data-label="Status" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${getStatusBadge(s.status)}</td>
+            ${canModify ? `<td data-label="Actions" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">
               <div class="flex gap-1 flex-nowrap">
                 <button class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-4 py-2 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150 text-xs px-3 py-1.5" onclick="superStaffViewProfile(${s.id})">Profile</button>
                 <button class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-4 py-2 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150 text-xs px-3 py-1.5" onclick="superStaffOpenEdit(${s.id})">Edit</button>
                 <button class="bg-red-500 hover:bg-red-600 text-white rounded-[6px] px-4 py-2 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold border-none transition-all duration-150 text-xs px-3 py-1.5" onclick="superStaffDelete(${s.id})">Delete</button>
               </div>
-            </td>` : `<td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><div class="flex gap-1 flex-nowrap"><button class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-4 py-2 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150 text-xs px-3 py-1.5" onclick="superStaffViewProfile(${s.id})">Profile</button></div></td>`}
+            </td>` : `<td data-label="Actions" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><div class="flex gap-1 flex-nowrap"><button class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-4 py-2 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150 text-xs px-3 py-1.5" onclick="superStaffViewProfile(${s.id})">Profile</button></div></td>`}
           </tr>`).join('')}
         </tbody></table>` : '<div class="text-center py-12 md:py-16 text-slate-400"><p class="mb-4 text-sm">No officials found</p></div>'}
       </div>

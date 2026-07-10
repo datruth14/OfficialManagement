@@ -28,10 +28,10 @@ async function renderAdminTeams() {
         </div>
         ${adminTeamsData.length ? `<div class="table-responsive"><table class="w-full border-collapse"><thead><tr><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Team Name</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Event</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Members</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Actions</th></tr></thead><tbody>
           ${adminTeamsData.map(t => `<tr>
-            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><strong>${escapeHtml(t.team_name)}</strong></td>
-            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(t.event_name)}</td>
-            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${t.member_count}</td>
-            <td class="flex gap-1 flex-nowrap px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">
+            <td data-label="Team Name" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><strong>${escapeHtml(t.team_name)}</strong></td>
+            <td data-label="Event" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(t.event_name)}</td>
+            <td data-label="Members" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${t.member_count}</td>
+            <td data-label="Actions" class="flex gap-1 flex-nowrap px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">
               <button class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150" onclick="viewAdminTeamMembers(${t.id})">Members</button>
               <button class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150" onclick="editAdminTeam(${t.id})">Edit</button>
               <button class="bg-red-500 hover:bg-red-600 text-white rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold border-none transition-all duration-150" onclick="deleteAdminTeam(${t.id})">Delete</button>
@@ -146,10 +146,10 @@ async function viewAdminTeamMembers(teamId) {
       <h3 style="margin-bottom:8px">Members (${members.length})</h3>
       ${members.length ? `<div class="table-responsive"><table class="w-full border-collapse"><thead><tr><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Name</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Email</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Roles</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Actions</th></tr></thead><tbody>
         ${members.map(m => `<tr>
-          <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(m.firstname)} ${escapeHtml(m.lastname)}</td>
-          <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(m.email) || '-'}</td>
-          <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${(m.roles || []).map(r => `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">${escapeHtml(r.name)}</span>`).join(' ') || '-'}</td>
-          <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><button class="bg-red-500 hover:bg-red-600 text-white rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold border-none transition-all duration-150" onclick="removeAdminTeamMember(${teamId}, ${m.id})">Remove</button></td>
+          <td data-label="Name" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(m.firstname)} ${escapeHtml(m.lastname)}</td>
+          <td data-label="Email" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(m.email) || '-'}</td>
+          <td data-label="Roles" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${(m.roles || []).map(r => `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">${escapeHtml(r.name)}</span>`).join(' ') || '-'}</td>
+          <td data-label="Actions" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><button class="bg-red-500 hover:bg-red-600 text-white rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold border-none transition-all duration-150" onclick="removeAdminTeamMember(${teamId}, ${m.id})">Remove</button></td>
         </tr>`).join('')}
       </tbody></table></div>` : '<div class="text-center py-12 md:py-16 text-slate-400"><p class="mb-4 text-sm">No members in this team</p></div>'}
     `;

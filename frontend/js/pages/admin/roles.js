@@ -23,10 +23,10 @@ async function renderAdminRoles() {
         <div class="table-responsive">
           ${adminRolesData.length ? `<table class="w-full border-collapse"><thead><tr><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Name</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Description</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Staff Count</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Actions</th></tr></thead><tbody>
             ${adminRolesData.map(r => `<tr>
-              <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><strong>${escapeHtml(r.name)}</strong></td>
-              <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(r.description) || '-'}</td>
-              <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${r.staff_count}</td>
-              <td class="flex gap-1 flex-nowrap px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">
+              <td data-label="Name" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><strong>${escapeHtml(r.name)}</strong></td>
+              <td data-label="Description" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(r.description) || '-'}</td>
+              <td data-label="Staff Count" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${r.staff_count}</td>
+              <td data-label="Actions" class="flex gap-1 flex-nowrap px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">
                 <button class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150" onclick="adminRolesOpenEdit(${r.id})">Edit</button>
                 <button class="bg-emerald-500 hover:bg-emerald-600 text-white rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold border-none transition-all duration-150" onclick="adminRolesOpenAssign(${r.id})">Assign</button>
                 <button class="bg-red-500 hover:bg-red-600 text-white rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold border-none transition-all duration-150" onclick="adminRolesDelete(${r.id})">Delete</button>
