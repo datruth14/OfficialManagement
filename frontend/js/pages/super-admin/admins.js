@@ -1,7 +1,12 @@
 let superAdminAdminsData = [];
 
 function isSuperUser() {
-  return Auth.isSuperAdmin();
+  try {
+    const u = JSON.parse(localStorage.getItem('user') || '{}');
+    return u.role === 'super_admin' || u.role === 'super_user';
+  } catch {
+    return false;
+  }
 }
 
 async function renderSuperAdminAdmins() {
