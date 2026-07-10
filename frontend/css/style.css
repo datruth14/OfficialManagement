@@ -32,7 +32,8 @@
   --shadow-xl: 0 20px 50px rgba(0,0,0,0.1);
   --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
 }
-html, body { height: 100%; font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+html { height: 100%; }
+body { min-height: 100dvh; font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
 a { color: var(--primary); text-decoration: none; }
 a:hover { text-decoration: underline; color: var(--primary-dark); }
 
@@ -120,8 +121,10 @@ a:hover { text-decoration: underline; color: var(--primary-dark); }
 .stat-card {
   background: var(--bg-card); border-radius: var(--radius-lg); box-shadow: var(--shadow);
   padding: 24px; transition: all 0.2s; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 .stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.stat-card:active { transform: translateY(0); }
 .stat-card .stat-top { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
 .stat-card .icon {
   width: 48px; height: 48px; border-radius: var(--radius);
@@ -159,8 +162,9 @@ textarea.form-control { resize: vertical; min-height: 100px; }
   display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px;
   border: none; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 600;
   cursor: pointer; transition: all 0.15s; text-decoration: none; font-family: inherit;
-  line-height: 1.4;
+  line-height: 1.4; -webkit-tap-highlight-color: transparent; user-select: none;
 }
+.btn:active { transform: scale(0.97); }
 .btn:hover { text-decoration: none; }
 .btn-primary { background: var(--primary); color: #0f172a; }
 .btn-primary:hover { background: var(--primary-dark); box-shadow: 0 4px 14px rgba(245,158,11,0.35); }
@@ -236,17 +240,18 @@ table .actions { display: flex; gap: 4px; white-space: nowrap; }
   width: 100%;
 }
 .portal-card {
-  background: rgba(255,255,255,0.04); backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 16px;
   padding: 28px; cursor: pointer; transition: all 0.25s;
-  display: flex; flex-direction: column;
+  display: flex; flex-direction: column; -webkit-tap-highlight-color: transparent;
 }
 .portal-card:hover {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.09);
   border-color: rgba(245,158,11,0.3);
   transform: translateY(-4px);
   box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
+.portal-card:active { transform: translateY(-1px); }
 .portal-card-icon { margin-bottom: 18px; }
 .portal-card-icon svg { filter: drop-shadow(0 4px 12px rgba(245,158,11,0.3)); }
 .portal-card-body { flex: 1; }
@@ -367,58 +372,74 @@ table .actions { display: flex; gap: 4px; white-space: nowrap; }
   .sidebar-overlay { display: none !important; }
 }
 @media (max-width: 768px) {
+  body { font-size: 15px; }
+  #app { min-height: 100dvh; }
+
   .sidebar {
-    transform: translateX(-100%); transition: transform 0.25s ease;
-    z-index: 100; width: 280px;
+    transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100; width: 290px;
   }
   .sidebar.open { transform: translateX(0); }
   .sidebar-overlay.open { display: block; }
-  .main-content { margin-left: 0; padding: 72px 14px 24px; }
-  .main-header { margin-bottom: 20px; }
-  .main-header h1 { font-size: 1.2rem; }
+  .sidebar-nav a { padding: 14px 18px; font-size: 0.92rem; border-radius: 10px; margin: 3px 10px; }
+  .sidebar-nav a .nav-icon { width: 22px; height: 22px; }
+  .sidebar-brand { padding: 20px 18px; }
+  .sidebar-brand .brand-logo { width: 34px; height: 34px; }
+  .sidebar-footer { padding: 14px 18px; }
+  .sidebar-footer .user-avatar { width: 36px; height: 36px; font-size: 0.8rem; }
+  .main-content { margin-left: 0; padding: 68px 14px 24px; }
+  .main-header { margin-bottom: 18px; }
+  .main-header h1 { font-size: 1.25rem; }
   .main-header p { font-size: 0.82rem; }
-  .form-row { grid-template-columns: 1fr; gap: 12px; }
+  .form-row { grid-template-columns: 1fr; gap: 10px; }
   .form-actions { flex-direction: column; }
-  .form-actions .btn { width: 100%; justify-content: center; padding: 12px 20px; }
-  .chart-grid { grid-template-columns: 1fr; gap: 16px; }
-  .chart-container { height: 220px; }
-  .card-grid { grid-template-columns: 1fr; gap: 14px; }
-  .stat-card { padding: 18px; }
-  .stat-card .value { font-size: 1.5rem; }
+  .form-actions .btn { width: 100%; justify-content: center; padding: 13px 20px; }
+  .chart-grid { grid-template-columns: 1fr; gap: 14px; }
+  .chart-container { height: 200px; }
+  .card-grid { grid-template-columns: 1fr; gap: 12px; }
+  .stat-card { padding: 16px; border-radius: 12px; }
+  .stat-card .stat-top { gap: 12px; }
+  .stat-card .icon { width: 42px; height: 42px; font-size: 1.1rem; }
+  .stat-card .value { font-size: 1.4rem; }
   .stat-card .label { padding-left: 0; font-size: 0.78rem; }
-  .card { padding: 18px; }
+  .card { padding: 16px; border-radius: 12px; margin-bottom: 16px; }
   .card-header { flex-direction: column; gap: 10px; align-items: stretch; }
   .card-header h2 { font-size: 0.95rem; }
   .card-header .btn { width: 100%; justify-content: center; }
-  .modal { padding: 20px; max-width: 96%; max-height: 90vh; }
+  .modal { padding: 20px; max-width: 94%; max-height: 92dvh; border-radius: 14px; }
   .modal-header h2 { font-size: 1rem; }
   .search-bar { flex-direction: column; gap: 8px; }
   .search-bar .form-control { max-width: 100%; }
-  table th, table td { padding: 10px 12px; font-size: 0.8rem; white-space: nowrap; }
-  table .actions { flex-wrap: wrap; }
-  .empty-state { padding: 36px 16px; }
-  .btn { padding: 10px 16px; font-size: 0.82rem; }
-  .btn-sm { padding: 8px 14px; font-size: 0.78rem; }
-  .form-control { padding: 12px 14px; font-size: 0.88rem; }
+  table th, table td { padding: 10px 10px; font-size: 0.78rem; white-space: nowrap; }
+  table .actions { flex-wrap: wrap; gap: 4px; }
+  .empty-state { padding: 32px 16px; }
+  .btn { padding: 12px 18px; font-size: 0.85rem; border-radius: 8px; }
+  .btn-sm { padding: 9px 14px; font-size: 0.78rem; }
+  .form-group { margin-bottom: 14px; }
+  .form-group label { font-size: 0.8rem; }
+  .form-control { padding: 12px 14px; font-size: 0.88rem; border-radius: 8px; }
+  .card-header .btn { width: 100%; justify-content: center; }
+  .card-header .btn-sm { width: auto; }
   body.sidebar-open { overflow: hidden; }
-  .sidebar-nav a { padding: 12px 16px; font-size: 0.92rem; }
-  .sidebar-brand { padding: 18px 16px; }
-  .sidebar-footer { padding: 14px 16px; }
-  .sidebar-footer .user-avatar { width: 34px; height: 34px; font-size: 0.75rem; }
 
-  /* portal page mobile */
-  .portal-header { padding: 24px 18px 12px; }
-  .portal-brand h1 { font-size: 1.2rem; }
-  .portal-brand p { font-size: 0.8rem; }
-  .portal-grid { padding: 12px 14px 24px; gap: 14px; grid-template-columns: 1fr; }
-  .portal-card { padding: 20px; }
-  .portal-card-body h3 { font-size: 1rem; }
-  .portal-card-body p { font-size: 0.8rem; }
+  .portal-header { padding: 20px 16px 8px; }
+  .portal-brand { gap: 12px; }
+  .portal-brand svg { width: 32px; height: 32px; }
+  .portal-brand h1 { font-size: 1.15rem; }
+  .portal-brand p { font-size: 0.78rem; }
+  .portal-grid { padding: 10px 14px 20px; gap: 12px; grid-template-columns: 1fr; }
+  .portal-card { padding: 18px; border-radius: 14px; }
+  .portal-card-icon { margin-bottom: 14px; }
+  .portal-card-icon svg { width: 34px; height: 34px; }
+  .portal-card-body h3 { font-size: 0.95rem; }
+  .portal-card-body p { font-size: 0.78rem; line-height: 1.4; }
+  .portal-card-footer { margin-top: 16px; }
+  .portal-footer { font-size: 0.72rem; padding: 14px 16px 24px; }
 
-  /* login page mobile */
-  .login-card { padding: 28px 20px 24px; max-width: 92%; }
-  .login-card h1 { font-size: 1.3rem; }
-  .login-card .subtitle { font-size: 0.82rem; margin-bottom: 22px; }
+  .login-card { padding: 26px 18px 22px; max-width: 92%; border-radius: 14px; }
+  .login-card h1 { font-size: 1.25rem; }
+  .login-card .subtitle { font-size: 0.82rem; margin-bottom: 20px; }
   .login-logo svg { width: 40px; height: 40px; }
-  .input-icon-wrapper .form-control { height: 44px; font-size: 0.9rem; }
+  .input-icon-wrapper .form-control { height: 46px; font-size: 0.9rem; padding-left: 40px; }
+  .btn-login { height: 46px; font-size: 0.95rem; }
 }
