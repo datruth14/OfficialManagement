@@ -1,7 +1,7 @@
 let superAdminAdminsData = [];
 
 function isSuperUser() {
-  return Auth.user && Auth.user.role === 'super_user';
+  return Auth.isSuperAdmin();
 }
 
 async function renderSuperAdminAdmins() {

@@ -1,8 +1,8 @@
 <?php
 
 $auth = requireAuth();
-if ($auth['role'] === 'super_admin') {
-    errorResponse('Program manager is read-only', 403);
+if (!in_array($auth['role'] , ['super_admin', 'super_user'])) {
+    errorResponse('Forbidden', 403);
 }
 $id = $GLOBALS['route_id'];
 
