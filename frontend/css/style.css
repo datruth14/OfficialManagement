@@ -99,3 +99,22 @@
 .table-responsive td .flex {
   justify-content: flex-end;
 }
+
+.z-\[1000\].open {
+  display: flex !important;
+}
+
+@media (max-width: 640px) {
+  .z-\[1000\] > div {
+    width: 96% !important;
+    max-width: 96% !important;
+    padding: 16px !important;
+    max-height: 90vh !important;
+  }
+  .z-\[1000\] select,
+  .z-\[1000\] input,
+  .z-\[1000\] textarea,
+  .z-\[1000\] button {
+    font-size: 16px !important;
+  }
+}
