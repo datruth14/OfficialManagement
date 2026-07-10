@@ -190,7 +190,7 @@ function renderWelcomePage() {
           </div>
         </div>
       </div>
-      <p class="relative z-10 text-center text-[0.7rem] md:text-xs text-white/15 px-4 pb-6 md:pb-8 pt-3 md:pt-5">© 2026 Software Portal. All rights reserved.</p>
+      <p class="relative z-10 text-center text-[0.7rem] md:text-xs text-white/15 px-4 pb-6 md:pb-8 pt-3 md:pt-5 mt-auto">© 2026 Software Portal. All rights reserved.</p>
     </div>
   `;
 }
