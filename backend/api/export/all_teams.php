@@ -10,11 +10,6 @@ $sql = "SELECT t.*, e.event_name,
 $conditions = [];
 $params = [];
 
-if (!in_array($auth['role'], ['super_admin', 'super_user'])) {
-    $conditions[] = "t.admin_id = ?";
-    $params[] = $auth['id'];
-}
-
 if (!empty($conditions)) {
     $sql .= " WHERE " . implode(' AND ', $conditions);
 }

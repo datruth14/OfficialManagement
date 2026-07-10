@@ -13,10 +13,6 @@ if (!$team) {
     errorResponse('Team not found', 404);
 }
 
-if (!in_array($auth['role'], ['super_admin', 'super_user']) && (int)$team['admin_id'] !== (int)$auth['id']) {
-    errorResponse('Forbidden', 403);
-}
-
 $stmt = $db->prepare("
     SELECT s.id, s.staff_id, s.firstname, s.lastname, s.email, s.phone, s.gender, s.status,
            GROUP_CONCAT(DISTINCT r.name) as role_names,

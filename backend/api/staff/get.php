@@ -7,11 +7,6 @@ $db = getDb();
 $sql = "SELECT s.* FROM staff s WHERE s.id = ?";
 $params = [$id];
 
-if (!in_array($auth['role'], ['super_admin', 'super_user'])) {
-    $sql .= " AND s.admin_id = ?";
-    $params[] = $auth['id'];
-}
-
 $stmt = $db->prepare($sql);
 $stmt->execute($params);
 $staff = $stmt->fetch();

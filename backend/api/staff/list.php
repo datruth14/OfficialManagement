@@ -11,11 +11,6 @@ $sql = "SELECT DISTINCT s.* FROM staff s";
 $conditions = [];
 $params = [];
 
-if (!in_array($auth['role'], ['super_admin', 'super_user'])) {
-    $conditions[] = "s.admin_id = ?";
-    $params[] = $auth['id'];
-}
-
 if ($search) {
     $conditions[] = "(s.firstname LIKE ? OR s.lastname LIKE ? OR s.email LIKE ? OR s.phone LIKE ? OR s.staff_id LIKE ?)";
     $like = "%$search%";

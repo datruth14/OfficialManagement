@@ -2,20 +2,17 @@
 
 $auth = requireAuth();
 $db = getDb();
-$adminId = $auth['id'];
 
 // myEvents: only active events (all events - managers see all)
 $myEvents = $db->query("SELECT COUNT(*) as cnt FROM events WHERE status = 'active'");
 $myEventsCount = (int)$myEvents->fetch()['cnt'];
 
-// myStaff: only manager's own staff
-$myStaff = $db->prepare("SELECT COUNT(*) as cnt FROM staff WHERE admin_id = ?");
-$myStaff->execute([$adminId]);
+// myStaff: all staff
+$myStaff = $db->query("SELECT COUNT(*) as cnt FROM staff");
 $myStaffCount = (int)$myStaff->fetch()['cnt'];
 
-// myTeams: only manager's own teams
-$myTeams = $db->prepare("SELECT COUNT(*) as cnt FROM teams WHERE admin_id = ?");
-$myTeams->execute([$adminId]);
+// myTeams: all teams
+$myTeams = $db->query("SELECT COUNT(*) as cnt FROM teams");
 $myTeamsCount = (int)$myTeams->fetch()['cnt'];
 
 // myRoles (global)
@@ -28,21 +25,18 @@ $upcomingEvents = $db->query("
     ORDER BY e.event_date ASC LIMIT 5
 ");
 
-// recentTeams: only manager's teams
-$recentTeams = $db->prepare("
+// recentTeams: all teams
+$recentTeams = $db->query("
     SELECT t.*, e.event_name, (SELECT COUNT(*) FROM team_members tm WHERE tm.team_id = t.id) as member_count
     FROM teams t JOIN events e ON t.event_id = e.id
-    WHERE t.admin_id = ? ORDER BY t.created_at DESC LIMIT 5
+    ORDER BY t.created_at DESC LIMIT 5
 ");
-$recentTeams->execute([$adminId]);
 
-// recentStaff: only manager's staff
-$recentStaff = $db->prepare("
+// recentStaff: all staff
+$recentStaff = $db->query("
     SELECT DISTINCT s.* FROM staff s
-    WHERE s.admin_id = ?
     ORDER BY s.created_at DESC LIMIT 5
 ");
-$recentStaff->execute([$adminId]);
 
 // most recent active event (admin may have teams in it)
 $recentEvent = $db->query("
