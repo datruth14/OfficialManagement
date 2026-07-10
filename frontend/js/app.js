@@ -143,7 +143,7 @@ function renderWelcomePage() {
         <div class="shape shape-2"></div>
         <div class="shape shape-3"></div>
       </div>
-      <div class="relative z-10 px-4 md:px-12 pt-6 md:pt-10 pb-3 md:pb-5">
+      <div class="relative z-10 px-4 md:px-12 pt-6 md:pt-10 pb-3 md:pb-5 mt-8">
         <div class="flex items-center gap-3 md:gap-4">
           <svg width="32" height="32" viewBox="0 0 72 72" fill="none" class="md:w-10 md:h-10 drop-shadow-[0_8px_24px_rgba(245,158,11,0.35)]">
             <rect width="72" height="72" rx="18" fill="#f59e0b"/>
