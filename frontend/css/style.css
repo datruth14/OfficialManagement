@@ -50,7 +50,7 @@
   .mobile-navbar { display: none !important; }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .overflow-x-auto table,
   .table-responsive table {
     display: block;
