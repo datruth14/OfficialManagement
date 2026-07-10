@@ -402,7 +402,7 @@ table .actions { display: flex; gap: 4px; white-space: nowrap; }
   .stat-card .icon { width: 42px; height: 42px; font-size: 1.1rem; }
   .stat-card .value { font-size: 1.4rem; }
   .stat-card .label { padding-left: 0; font-size: 0.78rem; }
-  .card { padding: 16px; border-radius: 12px; margin-bottom: 16px; }
+  .card { padding: 16px; border-radius: 12px; margin-bottom: 16px; width: 100%; max-width: 100%; overflow-x: hidden; }
   .card-header { flex-direction: column; gap: 10px; align-items: stretch; }
   .card-header h2 { font-size: 0.95rem; }
   .card-header .btn { width: 100%; justify-content: center; }
