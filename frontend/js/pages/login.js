@@ -23,39 +23,44 @@ function renderLoginPage() {
   const remembered = localStorage.getItem('remembered_username') || '';
 
   document.getElementById('page-content').innerHTML = `
-    <div class="login-page">
-      <div class="login-bg-shapes">
+    <div class="min-h-dvh flex items-center justify-center bg-gradient-to-br from-[#0f172a] via-[#1e293b] via-[#334155] to-[#0f172a] relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none overflow-hidden">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
         <div class="shape shape-3"></div>
       </div>
-      <div class="login-card">
-        <div class="login-logo">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <div class="bg-white rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.3)] p-7 md:p-11 w-full max-w-[92%] md:max-w-[420px] relative z-10 animate-[modalIn_0.5s_ease-out]">
+        <button onclick="Router.navigate('/welcome')" class="absolute top-3 left-3 md:top-4 md:left-4 bg-transparent border-none cursor-pointer text-slate-400 p-2 rounded-[8px] flex items-center justify-center transition-all duration-200 hover:bg-surface hover:text-slate-900" aria-label="Back to welcome page">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <div class="text-center mb-5 md:mb-6">
+          <svg class="drop-shadow-[0_4px_12px_rgba(245,158,11,0.3)]" width="52" height="52" viewBox="0 0 52 52" fill="none">
             <rect width="52" height="52" rx="14" fill="#f59e0b"/>
             <path d="M26 15c-3.86 0-7 3.14-7 7s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm-10.5 21c0-3.5 7-5.25 10.5-5.25s10.5 1.75 10.5 5.25v1.75H15.5V36z" fill="#0f172a"/>
           </svg>
         </div>
-        <h1>Welcome Back</h1>
-        <p class="subtitle">Sign in to your account to continue</p>
+        <h1 class="text-center mb-1 text-xl md:text-2xl font-bold text-slate-900">Welcome Back</h1>
+        <p class="text-center text-slate-400 mb-6 md:mb-7 text-sm">Sign in to your account to continue</p>
         <form id="loginForm" autocomplete="off">
-          <div class="form-group">
-            <div class="input-icon-wrapper">
-              <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="mb-4 md:mb-4">
+            <div class="relative flex items-center">
+              <svg class="absolute left-3.5 text-slate-400 pointer-events-none z-10" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                 <circle cx="12" cy="7" r="4"/>
               </svg>
-              <input type="text" class="form-control" id="loginUsername" placeholder="Username" required autocomplete="username" value="${remembered}">
+              <input type="text" class="w-full pl-10 pr-10 h-11 md:h-12 text-sm border-2 border-slate-200 rounded-[6px] bg-surface focus:outline-none focus:border-brand focus:ring-[4px] focus:ring-brand/10 transition-all duration-200" id="loginUsername" placeholder="Username" required autocomplete="username" value="${remembered}">
             </div>
           </div>
-          <div class="form-group">
-            <div class="input-icon-wrapper">
-              <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="mb-4 md:mb-4">
+            <div class="relative flex items-center">
+              <svg class="absolute left-3.5 text-slate-400 pointer-events-none z-10" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
-              <input type="password" class="form-control" id="loginPassword" placeholder="Password" required autocomplete="current-password">
-              <button type="button" class="password-toggle" id="passwordToggle" tabindex="-1" aria-label="Toggle password visibility">
+              <input type="password" class="w-full pl-10 pr-10 h-11 md:h-12 text-sm border-2 border-slate-200 rounded-[6px] bg-surface focus:outline-none focus:border-brand focus:ring-[4px] focus:ring-brand/10 transition-all duration-200" id="loginPassword" placeholder="Password" required autocomplete="current-password">
+              <button type="button" class="absolute right-2 bg-transparent border-none cursor-pointer text-slate-400 p-2 flex items-center justify-center rounded-[6px] transition-all duration-200 z-10 hover:text-slate-900 hover:bg-surface" id="passwordToggle" tabindex="-1" aria-label="Toggle password visibility">
                 <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                   <circle cx="12" cy="12" r="3"/>
@@ -67,22 +72,22 @@ function renderLoginPage() {
               </button>
             </div>
           </div>
-          <div class="form-row-extra">
-            <label class="checkbox-label">
+          <div class="flex items-center justify-between mb-4 md:mb-4">
+            <label class="flex items-center gap-2 text-sm text-slate-400 cursor-pointer select-none relative pl-1">
               <input type="checkbox" id="rememberMe" ${remembered ? 'checked' : ''}>
-              <span class="checkmark"></span>
+              <span class="w-5 h-5 border-2 border-slate-200 rounded-[5px] inline-flex items-center justify-center transition-all duration-200 shrink-0"></span>
               Remember me
             </label>
           </div>
-          <div id="loginError" class="alert alert-error" style="display:none"></div>
-          <button type="submit" class="btn btn-primary btn-login" id="loginBtn">
+        <div id="loginError" class="p-3.5 rounded-[6px] mb-4 text-sm bg-red-50 text-red-700 border border-red-200" style="display:none"></div>
+        <button type="submit" class="w-full justify-center h-11 md:h-12 text-sm md:text-base font-bold bg-brand hover:bg-brand-dark text-slate-900 rounded-[6px] border-none cursor-pointer inline-flex items-center gap-1.5 transition-all duration-150" id="loginBtn">
             <span class="btn-text">Sign In</span>
-            <div class="btn-spinner" style="display:none">
+            <div class="btn-spinner inline-flex items-center" style="display:none">
               <div class="spinner-sm"></div>
             </div>
           </button>
         </form>
-        <p class="login-footer-text">Officials Management System v2.0</p>
+        <p class="text-center mt-6 text-xs text-slate-400">Officials Management System v2.0</p>
       </div>
     </div>
   `;

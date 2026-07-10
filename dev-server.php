@@ -32,5 +32,5 @@ if ($uri !== '/' && is_file($filePath)) {
 }
 
 // SPA fallback
-readfile(__DIR__ . '/index.html');
+readfile(__DIR__ . '/index.php');
 return true;

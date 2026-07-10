@@ -14,29 +14,31 @@ async function renderAdminTeams() {
     adminTeamsEvents = events;
     adminTeamsStaff = staff;
     document.getElementById('page-content').innerHTML = `
-      <div class="main-header">
-        <h1>Teams</h1>
-        <p>Manage your teams</p>
+      <div class="mb-6 md:mb-8">
+        <h1 class="text-xl md:text-2xl font-bold tracking-tight text-slate-900">Teams</h1>
+        <p class="text-sm text-slate-400 mt-1">Manage your teams</p>
       </div>
-      <div class="card">
-        <div class="card-header">
-          <h2>All Teams (${adminTeamsData.length})</h2>
-          <button class="btn btn-primary btn-sm" onclick="openModal('adminTeamsModal')">+ Add Team</button>
-          <button class="btn btn-sm btn-secondary" onclick="exportAllTeamsAdmin()">Export All CSV</button>
+      <div class="bg-white rounded-xl shadow-sm p-4 md:p-7 mb-6 transition-all duration-200 hover:shadow-md">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2.5 mb-5">
+          <h2 class="text-base md:text-lg font-bold text-slate-900">All Teams (${adminTeamsData.length})</h2>
+          <div class="flex flex-col md:flex-row gap-2 w-full md:w-auto">
+            <button class="bg-brand hover:bg-brand-dark text-slate-900 font-semibold rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer border-none transition-all duration-150 no-underline w-full md:w-auto justify-center" onclick="openModal('adminTeamsModal')">+ Add Team</button>
+            <button class="bg-slate-500 hover:bg-slate-600 text-white rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold border-none transition-all duration-150 w-full md:w-auto justify-center" onclick="exportAllTeamsAdmin()">Export All CSV</button>
+          </div>
         </div>
-        ${adminTeamsData.length ? `<div class="table-responsive"><table><thead><tr><th>Team Name</th><th>Event</th><th>Members</th><th>Actions</th></tr></thead><tbody>
+        ${adminTeamsData.length ? `<div class="table-responsive"><table class="w-full border-collapse"><thead><tr><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Team Name</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Event</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Members</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Actions</th></tr></thead><tbody>
           ${adminTeamsData.map(t => `<tr>
-            <td><strong>${escapeHtml(t.team_name)}</strong></td>
-            <td>${escapeHtml(t.event_name)}</td>
-            <td>${t.member_count}</td>
-            <td class="actions">
-              <button class="btn btn-sm btn-ghost" onclick="viewAdminTeamMembers(${t.id})">Members</button>
-              <button class="btn btn-sm btn-ghost" onclick="editAdminTeam(${t.id})">Edit</button>
-              <button class="btn btn-sm btn-danger" onclick="deleteAdminTeam(${t.id})">Delete</button>
-              <button class="btn btn-sm btn-success" onclick="exportAdminTeam(${t.id})">Export</button>
+            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><strong>${escapeHtml(t.team_name)}</strong></td>
+            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(t.event_name)}</td>
+            <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${t.member_count}</td>
+            <td class="flex gap-1 flex-nowrap px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">
+              <button class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150" onclick="viewAdminTeamMembers(${t.id})">Members</button>
+              <button class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150" onclick="editAdminTeam(${t.id})">Edit</button>
+              <button class="bg-red-500 hover:bg-red-600 text-white rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold border-none transition-all duration-150" onclick="deleteAdminTeam(${t.id})">Delete</button>
+              <button class="bg-emerald-500 hover:bg-emerald-600 text-white rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold border-none transition-all duration-150" onclick="exportAdminTeam(${t.id})">Export</button>
             </td>
           </tr>`).join('')}
-        </tbody></table></div>` : '<div class="empty-state"><p>No teams yet</p></div>'}
+        </tbody></table></div>` : '<div class="text-center py-12 md:py-16 text-slate-400"><p class="mb-4 text-sm">No teams yet</p></div>'}
       </div>
       ${adminTeamsModal()}
       ${adminTeamsMembersModal()}
@@ -48,22 +50,22 @@ async function renderAdminTeams() {
 
 function adminTeamsModal() {
   return `
-    <div class="modal-overlay" id="adminTeamsModal">
-      <div class="modal">
-        <div class="modal-header">
-          <h2 id="adminTeamsModalTitle">Add Team</h2>
-          <button class="modal-close" onclick="closeModal('adminTeamsModal')">&times;</button>
+    <div class="fixed inset-0 bg-[rgba(15,23,42,0.5)] z-[1000] hidden items-center justify-center backdrop-blur-[4px]" id="adminTeamsModal">
+      <div class="bg-white rounded-xl shadow-2xl w-[92%] max-w-[580px] max-h-[85vh] overflow-y-auto p-5 md:p-8 animate-[modalIn_0.2s_ease]">
+        <div class="flex justify-between items-center mb-5 md:mb-6">
+          <h2 class="text-base md:text-lg font-bold" id="adminTeamsModalTitle">Add Team</h2>
+          <button class="bg-transparent border-none text-2xl cursor-pointer text-slate-400 p-1 px-2.5 rounded-[6px] leading-none transition-all duration-150 hover:bg-surface hover:text-slate-900" onclick="closeModal('adminTeamsModal')">&times;</button>
         </div>
         <form id="adminTeamsForm" onsubmit="return saveAdminTeam(event)">
           <input type="hidden" id="at_id">
-          <div class="form-group"><label>Team Name *</label><input class="form-control" id="at_name" required></div>
-          <div class="form-group"><label>Event *</label><select class="form-control" id="at_event_id" required>
+          <div class="mb-4 md:mb-5"><label class="block text-xs font-semibold mb-1.5 text-slate-900">Team Name *</label><input class="w-full px-3.5 py-2.5 border border-slate-200 rounded-[6px] text-sm bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:ring-[3px] focus:ring-brand/10 transition-all duration-150" id="at_name" required></div>
+          <div class="mb-4 md:mb-5"><label class="block text-xs font-semibold mb-1.5 text-slate-900">Event *</label><select class="w-full px-3.5 py-2.5 border border-slate-200 rounded-[6px] text-sm bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:ring-[3px] focus:ring-brand/10 transition-all duration-150 appearance-none cursor-pointer" id="at_event_id" required>
             <option value="">Select Event</option>
             ${adminTeamsEvents.map(e => `<option value="${e.id}">${escapeHtml(e.event_name)}</option>`).join('')}
           </select></div>
-          <div class="form-actions">
-            <button type="button" class="btn btn-ghost" onclick="closeModal('adminTeamsModal')">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save</button>
+          <div class="flex flex-col md:flex-row gap-2.5 justify-end mt-6 md:mt-7">
+            <button type="button" class="bg-transparent border border-slate-200 text-slate-500 hover:bg-surface rounded-[6px] px-4 py-2 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold transition-all duration-150" onclick="closeModal('adminTeamsModal')">Cancel</button>
+            <button type="submit" class="bg-brand hover:bg-brand-dark text-slate-900 font-semibold rounded-[6px] px-4 md:px-5 py-2 md:py-2.5 inline-flex items-center gap-1.5 text-xs md:text-sm cursor-pointer border-none transition-all duration-150 no-underline">Save</button>
           </div>
         </form>
       </div>
@@ -73,11 +75,11 @@ function adminTeamsModal() {
 
 function adminTeamsMembersModal() {
   return `
-    <div class="modal-overlay" id="adminTeamsMembersModal">
-      <div class="modal">
-        <div class="modal-header">
-          <h2 id="adminTeamsMembersTitle">Team Members</h2>
-          <button class="modal-close" onclick="closeModal('adminTeamsMembersModal')">&times;</button>
+    <div class="fixed inset-0 bg-[rgba(15,23,42,0.5)] z-[1000] hidden items-center justify-center backdrop-blur-[4px]" id="adminTeamsMembersModal">
+      <div class="bg-white rounded-xl shadow-2xl w-[92%] max-w-[580px] max-h-[85vh] overflow-y-auto p-5 md:p-8 animate-[modalIn_0.2s_ease]">
+        <div class="flex justify-between items-center mb-5 md:mb-6">
+          <h2 class="text-base md:text-lg font-bold" id="adminTeamsMembersTitle">Team Members</h2>
+          <button class="bg-transparent border-none text-2xl cursor-pointer text-slate-400 p-1 px-2.5 rounded-[6px] leading-none transition-all duration-150 hover:bg-surface hover:text-slate-900" onclick="closeModal('adminTeamsMembersModal')">&times;</button>
         </div>
         <div id="adminTeamsMembersContent"></div>
       </div>
@@ -125,7 +127,7 @@ async function deleteAdminTeam(id) {
 async function viewAdminTeamMembers(teamId) {
   openModal('adminTeamsMembersModal');
   document.getElementById('adminTeamsMembersTitle').textContent = 'Team Members';
-  document.getElementById('adminTeamsMembersContent').innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+  document.getElementById('adminTeamsMembersContent').innerHTML = '<div class="text-center py-16 md:py-20 text-slate-400"><div class="spinner"></div></div>';
   try {
     const res = await apiGet('/teams/' + teamId + '/members');
     const members = res.members || [];
@@ -134,25 +136,25 @@ async function viewAdminTeamMembers(teamId) {
       <div style="margin-bottom:16px">
         <label><strong>Add Members</strong></label>
         <div style="display:flex;gap:8px;margin-top:8px">
-          <select class="form-control" id="addMemberSelect" style="max-width:300px">
+          <select class="w-full px-3.5 py-2.5 border border-slate-200 rounded-[6px] text-sm bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:ring-[3px] focus:ring-brand/10 transition-all duration-150 appearance-none cursor-pointer" id="addMemberSelect" style="max-width:300px">
             <option value="">Select officials...</option>
             ${availableStaff.map(s => `<option value="${s.id}">${escapeHtml(s.firstname)} ${escapeHtml(s.lastname)} (${s.staff_id})</option>`).join('')}
           </select>
-          <button class="btn btn-sm btn-primary" onclick="addAdminTeamMember(${teamId})">Add</button>
+          <button class="bg-brand hover:bg-brand-dark text-slate-900 font-semibold rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer border-none transition-all duration-150 no-underline" onclick="addAdminTeamMember(${teamId})">Add</button>
         </div>
       </div>
       <h3 style="margin-bottom:8px">Members (${members.length})</h3>
-      ${members.length ? `<div class="table-responsive"><table><thead><tr><th>Name</th><th>Email</th><th>Roles</th><th>Actions</th></tr></thead><tbody>
+      ${members.length ? `<div class="table-responsive"><table class="w-full border-collapse"><thead><tr><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Name</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Email</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Roles</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Actions</th></tr></thead><tbody>
         ${members.map(m => `<tr>
-          <td>${escapeHtml(m.firstname)} ${escapeHtml(m.lastname)}</td>
-          <td>${escapeHtml(m.email) || '-'}</td>
-          <td>${(m.roles || []).map(r => `<span class="badge badge-active">${escapeHtml(r.name)}</span>`).join(' ') || '-'}</td>
-          <td><button class="btn btn-sm btn-danger" onclick="removeAdminTeamMember(${teamId}, ${m.id})">Remove</button></td>
+          <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(m.firstname)} ${escapeHtml(m.lastname)}</td>
+          <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(m.email) || '-'}</td>
+          <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${(m.roles || []).map(r => `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">${escapeHtml(r.name)}</span>`).join(' ') || '-'}</td>
+          <td class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle"><button class="bg-red-500 hover:bg-red-600 text-white rounded-[6px] px-3 py-1.5 inline-flex items-center gap-1.5 text-xs cursor-pointer font-semibold border-none transition-all duration-150" onclick="removeAdminTeamMember(${teamId}, ${m.id})">Remove</button></td>
         </tr>`).join('')}
-      </tbody></table></div>` : '<div class="empty-state"><p>No members in this team</p></div>'}
+      </tbody></table></div>` : '<div class="text-center py-12 md:py-16 text-slate-400"><p class="mb-4 text-sm">No members in this team</p></div>'}
     `;
   } catch (err) {
-    document.getElementById('adminTeamsMembersContent').innerHTML = `<div class="alert alert-error">${err.message}</div>`;
+    document.getElementById('adminTeamsMembersContent').innerHTML = `<div class="p-3.5 md:p-4 rounded-[6px] mb-4 text-sm bg-red-50 text-red-700 border border-red-200">${err.message}</div>`;
   }
 }
 
