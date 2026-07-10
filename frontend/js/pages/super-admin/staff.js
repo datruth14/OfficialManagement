@@ -44,14 +44,14 @@ function renderSuperStaffTable(search) {
         ${canCreate ? '<button class="bg-brand hover:bg-brand-dark text-slate-900 font-semibold rounded-[6px] px-4 md:px-5 py-2 md:py-2.5 inline-flex items-center gap-1.5 text-xs md:text-sm cursor-pointer border-none transition-all duration-150 no-underline text-xs px-3 py-1.5 w-full md:w-auto justify-center" onclick="superStaffOpenCreate()">+ Add Official</button>' : ''}
       </div>
       <div class="flex flex-col md:flex-row gap-3 mb-5 items-stretch md:items-center">
-        <input type="text" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-[6px] text-sm bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:ring-[3px] focus:ring-brand/10 transition-all duration-150 max-w-full md:max-w-[340px]" placeholder="Search by name, official ID, email..." id="ssSearch" oninput="renderSuperStaffTable(this.value)">
+        <input type="text" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-[6px] text-sm bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:ring-[3px] focus:ring-brand/10 transition-all duration-150 max-w-full md:max-w-[340px]" placeholder="Search by name, official ID, kingschat..." id="ssSearch" oninput="renderSuperStaffTable(this.value)">
       </div>
       <div class="overflow-x-auto">
-        ${filtered.length ? `<table class="w-full border-collapse"><thead><tr><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Official ID</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Name</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Email</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Phone</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Gender</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Roles</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Status</th>${actionsTh}</tr></thead><tbody>
+        ${filtered.length ? `<table class="w-full border-collapse"><thead><tr><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Official ID</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Name</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Kingschat</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Phone</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Gender</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Roles</th><th class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold px-3 md:px-4 py-3 text-left border-b border-slate-200">Status</th>${actionsTh}</tr></thead><tbody>
           ${filtered.map(s => `<tr>
             <td data-label="Official ID" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.staff_id)}</td>
             <td data-label="Name" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.firstname)} ${escapeHtml(s.lastname)}</td>
-            <td data-label="Email" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.email) || '-'}</td>
+            <td data-label="Kingschat" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.email) || '-'}</td>
             <td data-label="Phone" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.phone) || '-'}</td>
             <td data-label="Gender" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${escapeHtml(s.gender) || '-'}</td>
             <td data-label="Roles" class="px-3 md:px-4 py-3 text-sm border-b border-slate-200 align-middle">${(s.roles || []).map(r => `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">${escapeHtml(r.name)}</span>`).join(' ') || '-'}</td>
@@ -96,7 +96,7 @@ async function superStaffViewProfile(id) {
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.9rem">
           <div><strong>Name:</strong> ${escapeHtml(s.firstname)} ${escapeHtml(s.lastname)}</div>
           <div><strong>Official ID:</strong> ${escapeHtml(s.staff_id)}</div>
-          <div><strong>Email:</strong> ${escapeHtml(s.email) || '-'}</div>
+          <div><strong>Kingschat:</strong> ${escapeHtml(s.email) || '-'}</div>
           <div><strong>Phone:</strong> ${escapeHtml(s.phone) || '-'}</div>
           <div><strong>Gender:</strong> ${escapeHtml(s.gender) || '-'}</div>
           <div><strong>Status:</strong> ${getStatusBadge(s.status)}</div>
@@ -136,7 +136,7 @@ function superStaffModal() {
           </div>
           <div class="mb-4 md:mb-5"><label class="block text-xs font-semibold mb-1.5 text-slate-900">Official ID (auto-generated if empty)</label><input class="w-full px-3.5 py-2.5 border border-slate-200 rounded-[6px] text-sm bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:ring-[3px] focus:ring-brand/10 transition-all duration-150" id="ss_staff_id" placeholder="Leave empty for auto-generate"></div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-            <div class="mb-4 md:mb-5"><label class="block text-xs font-semibold mb-1.5 text-slate-900">Email</label><input type="email" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-[6px] text-sm bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:ring-[3px] focus:ring-brand/10 transition-all duration-150" id="ss_email"></div>
+            <div class="mb-4 md:mb-5"><label class="block text-xs font-semibold mb-1.5 text-slate-900">Kingschat Username</label><input type="text" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-[6px] text-sm bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:ring-[3px] focus:ring-brand/10 transition-all duration-150" id="ss_kingschat" placeholder="@username"></div>
             <div class="mb-4 md:mb-5"><label class="block text-xs font-semibold mb-1.5 text-slate-900">Phone</label><input class="w-full px-3.5 py-2.5 border border-slate-200 rounded-[6px] text-sm bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:ring-[3px] focus:ring-brand/10 transition-all duration-150" id="ss_phone"></div>
           </div>
           <div class="mb-4 md:mb-5"><label class="block text-xs font-semibold mb-1.5 text-slate-900">Address</label><textarea class="w-full px-3.5 py-2.5 border border-slate-200 rounded-[6px] text-sm bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand focus:ring-[3px] focus:ring-brand/10 transition-all duration-150" id="ss_address"></textarea></div>
@@ -166,7 +166,7 @@ function superStaffResetForm() {
   document.getElementById('ss_firstname').value = '';
   document.getElementById('ss_lastname').value = '';
   document.getElementById('ss_staff_id').value = '';
-  document.getElementById('ss_email').value = '';
+  document.getElementById('ss_kingschat').value = '';
   document.getElementById('ss_phone').value = '';
   document.getElementById('ss_gender').value = '';
   document.getElementById('ss_status').value = 'active';
@@ -189,7 +189,7 @@ function superStaffOpenEdit(id) {
   document.getElementById('ss_firstname').value = s.firstname;
   document.getElementById('ss_lastname').value = s.lastname;
   document.getElementById('ss_staff_id').value = s.staff_id || '';
-  document.getElementById('ss_email').value = s.email || '';
+  document.getElementById('ss_kingschat').value = s.email || '';
   document.getElementById('ss_phone').value = s.phone || '';
   document.getElementById('ss_gender').value = s.gender || '';
   document.getElementById('ss_status').value = s.status;
@@ -211,7 +211,7 @@ async function superStaffSave(e) {
     firstname: document.getElementById('ss_firstname').value,
     lastname: document.getElementById('ss_lastname').value,
     staff_id: document.getElementById('ss_staff_id').value,
-    email: document.getElementById('ss_email').value,
+    email: document.getElementById('ss_kingschat').value,
     phone: document.getElementById('ss_phone').value,
     gender: document.getElementById('ss_gender').value,
     status: document.getElementById('ss_status').value,
