@@ -6,11 +6,6 @@ async function apiRequest(endpoint, options = {}) {
     ...options,
   };
 
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`;
-  }
-
   if (config.body && typeof config.body === 'object') {
     config.body = JSON.stringify(config.body);
   }
@@ -29,6 +24,12 @@ async function apiRequest(endpoint, options = {}) {
     a.click();
     URL.revokeObjectURL(url);
     return;
+  }
+
+  if (response.status === 401) {
+    Auth.user = null;
+    window.location.hash = '#/login';
+    throw new Error('Session expired');
   }
 
   const data = await response.json();

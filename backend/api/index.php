@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../utils/cors.php';
 require_once __DIR__ . '/../utils/response.php';
@@ -25,6 +27,12 @@ try {
     // /api/auth/me
     if ($uri === '/api/auth/me' && $method === 'GET') {
         require "$basePath/auth/me.php";
+        exit;
+    }
+
+    // /api/auth/logout
+    if ($uri === '/api/auth/logout' && $method === 'POST') {
+        require "$basePath/auth/logout.php";
         exit;
     }
 

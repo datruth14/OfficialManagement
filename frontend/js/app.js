@@ -211,8 +211,8 @@ function registerRoutes() {
   Router.register('/super-admin/teams', renderSuperAdminTeams);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  Auth.init();
+document.addEventListener('DOMContentLoaded', async () => {
+  await Auth.init();
   registerRoutes();
   renderSidebar();
   Router.init();
